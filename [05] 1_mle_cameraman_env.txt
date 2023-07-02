@@ -1,0 +1,11 @@
+
+# Create conda environment
+1. conda create -n p3.8
+2. conda activate p3.8
+3. conda install python=3.8
+4. conda install numpy matlplotlib
+5. conda install opencv-python scipy 
+
+TIF Link = "https://people.math.sc.edu/Burkardt/data/tif/tif.html"
+Download the cameraman.tif from this link and perform MLE
+I'll perform MLE on galaxy.tif
