@@ -2,7 +2,9 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.stats as stats
+# install scipy and opencv-python via conda/pip
 
+# Performing MLE on galaxy.tif instead of cameraman.tif as it was done in the class
 lambd = cv2.imread('galaxy.tif')
 lambd = cv2.cvtColor(lambd, cv2.COLOR_BGR2GRAY)/255
 T = 100

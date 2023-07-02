@@ -5,6 +5,8 @@ N = 50
 S = np.arange(1, N, 0.1)
 o = np.linspace(0.1, 0.9, 100)
 
+
+# MLE 
 def L(S, o):
     return S * np.log(o) + (N - S) * np.log(1. - o)
 
