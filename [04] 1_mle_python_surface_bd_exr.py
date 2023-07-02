@@ -1,28 +1,32 @@
-# import modules
 import numpy as np
 import matplotlib.pyplot as plt
 
 N = 50
-S = np.arange(1,N+1)
-theta = np.linspace(0.1,0.9,100)
+S = np.arange(1, N, 0.1)
+o = np.linspace(0.1, 0.9, 100)
 
-S_grid, theta_grid = np.meshgrid(S, theta)
-L = S_grid*np.log(theta_grid) + (N-S_grid)*np.log(1-theta_grid)
+def L(S, o):
+    return S * np.log(o) + (N - S) * np.log(1. - o)
 
-S_index = np.where(S == 25)[0][0]
-max_likelihood_index = np.unravel_index(np.argmax(L[S_index]), L.shape)
-max_likelihood_theta = theta[max_likelihood_index[1]]
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+fig.suptitle("Maximum Likelihood Estimation")
 
-fig = plt.figure()
-ax = fig.add_subplot(111,projection='3d')
-s = ax.plot_surface(S_grid, theta_grid, L, cmap='jet')
-ax.set_xlabel('S')
-ax.set_ylabel('theta')
-ax.set_zlabel('L(theta|S)')
-ax.set_title('Maximum Likelihood Estimation')
-ax.view_init(65,15)
+# Bird's Eye View Heatmap
+heatmap = ax1.imshow(L(np.repeat(S[:, np.newaxis], len(o), axis=1), np.repeat(o[np.newaxis, :], len(S), axis=0)), 
+                     cmap='jet', origin='lower', aspect='auto', extent=[S.min(), S.max(), o.min(), o.max()])
+ax1.set_xlabel('S')
+ax1.set_ylabel('θ')
+ax1.set_title("Bird's Eye View")
 
-ax.scatter(25,max_likelihood_theta, L[S_index, max_likelihood_index[1]], color='red', s=100, label='MLE')
-ax.legend()
+ax1.axvline(x=12, color='black')
+
+# L(o|S=12) Plot
+ax2.plot(o, L(12, o), color='blue')
+ax2.set_xlabel('o')
+ax2.set_title("L(o|S=12)")
+
+# Adjust spacing between subplots
+plt.subplots_adjust(wspace=0.5)
+
 # plt.show()
-plt.savefig("./pictures/s-theta-L-25.png")
+plt.savefig("./pictures/s-theta-L-12")
