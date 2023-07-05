@@ -1,0 +1,9 @@
+Applying pca on the given dataset using inbuilt library
+and on a generated dataset using inbuilt library and from scratch
+
+conda env
+conda create -n p3.8
+conda activate p3.8
+conda install python=3.8 numpy pandas scikit-learn
+
+then run each line inside python terminal in the conda environment
